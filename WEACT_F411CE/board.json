@@ -1,0 +1,23 @@
+{
+    "deploy": [
+        "../deploy.md"
+    ],
+    "docs": "",
+    "features": [
+        "User button",
+        "External Flash",
+        "USB-C"
+    ],
+    "images": [],
+    "mcu": "stm32f4",
+    "product": "WeAct Studio STM32F411CE",
+    "url": "https://github.com/WeActStudio/WeActStudio.MiniSTM32F4x1",
+    "variants": {
+        "FLASH_4MB": "4 MiB Flash",
+        "FLASH_8MB": "8 MiB Flash",
+        "FLASH_16MB": "16 MiB Flash",
+        "NO_FLASH": "No external SPI Flash"
+    },
+    "vendor": "WeAct Studio"
+}
+
