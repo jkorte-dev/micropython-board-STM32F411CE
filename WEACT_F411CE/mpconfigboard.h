@@ -30,12 +30,8 @@
 
 #define MICROPY_PY_THREAD           (1)
 
-#define MICROPY_BOARD_EARLY_INIT    WeAct_Core_board_early_init
-void WeAct_Core_board_early_init(void);
-
 /* BOARD Ver 2.0 set 1 ，other set 0 ex.V1.3,V2.1 */
 #define VERSION_V20 (0)
-
 
 #define MICROPY_HW_HAS_SWITCH       (1)
 #define MICROPY_HW_HAS_FLASH        (1)
@@ -101,6 +97,9 @@ void WeAct_Core_board_early_init(void);
 #define MICROPY_HW_SPI5_MISO    (pin_A12)   //              pin 12 on CN10
 #define MICROPY_HW_SPI5_MOSI    (pin_B0)    //              pin 34 on CN7
 
+// I2S
+#define MICROPY_HW_I2S2             (1)
+
 // USRSW is pulled low. Pressing the button makes the input go high.
 #define MICROPY_HW_USRSW_PIN        (pin_A0)
 #define MICROPY_HW_USRSW_PULL       (GPIO_PULLUP)
@@ -134,15 +133,12 @@ void WeAct_Core_board_early_init(void);
 #if !MICROPY_HW_ENABLE_INTERNAL_FLASH_STORAGE
 
 #define MICROPY_HW_SPIFLASH_ENABLE_CACHE (1)
+
 extern const struct _mp_spiflash_config_t spiflash_config;
 extern struct _spi_bdev_t spi_bdev;
-#define MICROPY_HW_BDEV_IOCTL(op, arg) ( \
-    (op) == BDEV_IOCTL_NUM_BLOCKS ? (MICROPY_HW_SPIFLASH_SIZE_BITS / 8 / FLASH_BLOCK_SIZE) : \
-    (op) == BDEV_IOCTL_INIT ? spi_bdev_ioctl(&spi_bdev, (op), (uint32_t)&spiflash_config) : \
-    spi_bdev_ioctl(&spi_bdev, (op), (arg)) \
-)
-#define MICROPY_HW_BDEV_READBLOCKS(dest, bl, n) spi_bdev_readblocks(&spi_bdev, (dest), (bl), (n))
-#define MICROPY_HW_BDEV_WRITEBLOCKS(src, bl, n) spi_bdev_writeblocks(&spi_bdev, (src), (bl), (n))
+#define MICROPY_HW_BDEV_SPIFLASH    (&spi_bdev)
+#define MICROPY_HW_BDEV_SPIFLASH_CONFIG (&spiflash_config)
+#define MICROPY_HW_BDEV_SPIFLASH_SIZE_BYTES (MICROPY_HW_SPIFLASH_SIZE_BITS / 8)
 #define MICROPY_HW_BDEV_SPIFLASH_EXTENDED (&spi_bdev) // for extended block protocol
 
 #endif

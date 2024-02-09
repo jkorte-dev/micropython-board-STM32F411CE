@@ -12,7 +12,7 @@ configured by using the `BOARD_VARIANT` parameter. The valid options are
 
 ```
    $ cd ports/stm32
-   $ make BOARD=WEACT_STM32F411CE BOARD_VARIANT=FLASH_4M submodules all  # Build the 4 MiB variant
+   $ make BOARD=WEACT_F411CE BOARD_VARIANT=FLASH_4M submodules all  # Build the 4 MiB variant
 ```
 
 ## Important note
